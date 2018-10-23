@@ -25,19 +25,37 @@ object RecursiveFunctions {
    *        def reverse[A](list: List[A]): List[A]
    */
 
+  def reverse[A](as: List[A]) :List[A] = {
+    @tailrec
+    def loop(rem: List[A], x: List[A]) :List[A] = rem match {
+        //Append to the lat list
+      case Nil() => x
+      case Cons(h, tail) => loop(tail, Cons(h, x))
+    }
+    loop(as, Nil())
+  }
+
 
 
   // apply your solution-function from (a) here, DO NOT change the signature
-  def testReverse[A](list: List[A]): List[A] = list
+  def testReverse[A](list: List[A]): List[A] = reverse(list)
 
   /* b) Write a function that applies a function to every value of a list:
    *        def map[A, B](list: List[A])(f: A => B): List[B]
    */
+  def map[A, B](list: List[A])(f: A => B) : List[B] = {
+    @tailrec
+    def loop(rem:List[A], value: List[B]) :List[B] = rem match {
+      case Nil() => value
+      case Cons(h, t) => loop(t, Cons(f(h), value))
+    }
 
+    loop(list, Nil())
+  }
 
 
   // apply your solution-function from (b) here, DO NOT change the signature
-  def testMap[A, B](list: List[A], f: A => B): List[B] = Nil()
+  def testMap[A, B](list: List[A], f: A => B): List[B] = map(list)(x => f(x))
   
   /* c) Write a function that appends one list to another:
    *        def append[A](l: List[A], r: List[A]): List[A]

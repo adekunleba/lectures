@@ -32,19 +32,33 @@ object Compositions {
 
   def testCompose[A, B, C, D](f: A => B)
                              (g: B => C)
-                             (h: C => D): A => D = ???
+                             (h: C => D): A => D = f andThen g andThen h// h.compose(g.compose(f))
 
   // b) Combose the functions using `map` and `flatMap`. You can implement your solution directly in the test-function.
   //    DO NOT change the signature
 
-  def testMapFlatMap[A, B, C, D](f: A => Option[B])
-                                (g: B => Option[C])
-                                (h: C => D): Option[A] => Option[D] = ???
+  def testMapFlatMap[A, B, C, D](f: A => Option[B])(g: B => Option[C])(h: C => D): Option[A] => Option[D] =
+    opt => {
+      val result = opt.flatMap(f).flatMap(g).map(h)
+      result
+    }
 
-  // c) Combose the functions using for-comprehension. You can implement your solution directly in the test-function.
+  //Since function h maps C => D hence this is why we use map because map takes function mapping C => D
+  //Consider that we change function h to C => Option[D] then we will be using flatmap
+  def testMapFlatMapTwo[A, B, C, D](f: A => Option[B])(g: B => Option[C])(h: C => Option[D]): Option[A] => Option[D] =
+    opt => {
+      val result = opt.flatMap(f).flatMap(g).flatMap(h)
+      result
+    }
+  // c) Compose the functions using for-comprehension. You can implement your solution directly in the test-function.
   //    DO NOT change the signature
-
-  def testForComprehension[A, B, C, D](f: A => Option[B])
-                                      (g: B => Option[C])
-                                      (h: C => D): Option[A] => Option[D] = ???
+//Using a for loop in Optional
+  def testForComprehension[A, B, C, D](f: A => Option[B])(g: B => Option[C])(h: C => D): Option[A] => Option[D] =
+    opt =>
+      for {
+        x <- opt
+        y <- f(x)
+        z <- g(y)
+        a <- h(z)
+      } yield a
 }
