@@ -50,7 +50,7 @@ object RecursiveFunctions {
       case Cons(h, t) => loop(t, Cons(f(h), value))
     }
 
-    loop(list, Nil())
+    reverse(loop(list, Nil()))
   }
 
 
@@ -60,6 +60,14 @@ object RecursiveFunctions {
   /* c) Write a function that appends one list to another:
    *        def append[A](l: List[A], r: List[A]): List[A]
    */
+  def append[A](l: List[A], r: List[A]) :List[A] = {
+    @tailrec
+    def loop(rem :List[A], value:List[A]) :List[A] = rem match {
+      case Nil() => value
+      case Cons(h, t) => loop(t, Cons(h,value))
+    }
+    loop(reverse(l), r)
+  }
 
 
 
@@ -73,6 +81,15 @@ object RecursiveFunctions {
    *    the list. Therefore, you generate a List[List[B]]. You have to flatten this 
    *    structure.
    */
+
+  def flatMap[A, B](list: List[A])(f: A => List[B]): List[B] = {
+    @tailrec
+    def loop(rem: List[A], mid: List[B]) :List[B] = rem match {
+      case Nil() => mid
+      case Cons(h, t) => loop(t, append(f(h), mid))
+    }
+    reverse(loop(list, Nil()))
+  }
 
 
 

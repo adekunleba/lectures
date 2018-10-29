@@ -19,6 +19,8 @@ object Sequence {
   /* a) Find the last element of a Seq.
    *    You can implement your solution directly in the test-function. DO NOT change the signature.
    */
+
+
   def testLastElement[A](seq: Seq[A]): Option[A] = ???
 
   /* b) Zip two Seqs (e.g. Seq(1, 2) and Seq(3, 4) become Seq((1, 3), (2, 4))) - when one Seq is longer ignore the remaining elements.

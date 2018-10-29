@@ -59,6 +59,5 @@ object Compositions {
         x <- opt
         y <- f(x)
         z <- g(y)
-        a <- h(z)
-      } yield a
+      } yield h(z)
 }

@@ -37,8 +37,10 @@ object Functions {
 
   // c) Write a uncurried `rectangle` function.
 
+  def rectangleUncurried(a:Double, b:Double) :Double = a * b
+
 
 
   // apply your solution-function from (c) here, DO NOT change the signature
-  def testRectangleUc(a: Double, b: Double): Double = a
+  def testRectangleUc(a: Double, b: Double): Double = rectangleUncurried(a, b)
 }

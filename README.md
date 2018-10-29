@@ -57,6 +57,8 @@ sbt> test
 
 # run a certain test
 sbt> test:testOnly <name of test>
+
+E.g test:testOnlye *FunctionsSpec
 ```
 
 If you need some more information take a look into the [introduction slides](https://scalasummerschool.github.io/lectures/introduction/).
